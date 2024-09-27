@@ -20,13 +20,10 @@ async function start(){
 
     app.use('/images', express.static(path.join(__dirname, '../assets')));
 
-
-    // app.get('/hello', async (req, res) => {
-    //     await client.connect();
-    //     const db = client.db('dsv-db');
-    //     const products = await db.collection('products').find({}).toArray();
-    //     res.send(products);
-    // });
+    app.use(
+        express.static(path.resolve(__dirname, '../dist'),
+        {maxAge: '1y', etag:false},
+    ))
     
     app.get('/api/products', async (req, res) => {
         
@@ -86,10 +83,16 @@ async function start(){
         const product = await db.collection('products').findOne({id:productId});
         res.json(product)
     })
+
+    app.get('*', (req, res) =>{
+        res.sendFile(path.join(__dirname, '../dist/index.html'))
+    });
+
+    const port=process.env.PORT || 8000;
     
     
     app.listen(8000, () =>{
-        console.log('Server is listening at port 8000');
+        console.log('Server is listening at port' + port );
     });
 }
 
