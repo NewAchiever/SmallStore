@@ -18,10 +18,11 @@
     "xpress": "^2.4.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.5",
-    "@babel/node": "^7.23.9",
-    "@babel/plugin-transform-runtime": "^7.24.3",
-    "@babel/preset-env": "^7.24.5",
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/plugin-transform-runtime": "^7.25.4",
+    "@babel/preset-env": "^7.25.4",
     "nodemon": "^3.1.0"
   }
 }
