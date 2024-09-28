@@ -1,6 +1,11 @@
 <template>
   <div class="grid-wrap">
-    <div class="product-item" v-for="product in products" :key="product.id">
+    <div
+      class="product-item"
+      v-if="products.length > 0"
+      v-for="product in products"
+      :key="product.id"
+    >
       <img :src="product.imageUrl" />
       <h3 class="product-name">{{ product.name }}</h3>
       <p class="product-price">{{ product.price }}</p>
@@ -14,6 +19,6 @@
 <script>
 export default {
   name: "ProductsList",
-  props: ['products'],
-}
+  props: ["products"],
+};
 </script>
