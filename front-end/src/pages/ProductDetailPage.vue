@@ -55,9 +55,7 @@ export default {
   watch: {
     async user(newUserValue) {
       if (newUserValue) {
-        const cartResponse = await axios.get(
-          `/api/users/${newUserValue.uid}/cart`
-        );
+        const cartResponse = await axios.get(`/users/${newUserValue.uid}/cart`);
         const cartItems = cartResponse.data;
         this.cartItems = cartItems;
       }
@@ -65,7 +63,7 @@ export default {
   },
   methods: {
     async addToCart() {
-      await axios.post(`/api/users/${this.user.uid}/cart`, {
+      await axios.post(`/users/${this.user.uid}/cart`, {
         id: this.$route.params.productId,
       });
       alert("Successfully added item to cart!");
@@ -95,13 +93,13 @@ export default {
     }
 
     const response = await axios.get(
-      `/api/products/${this.$route.params.productId}`
+      `/products/${this.$route.params.productId}`
     );
     const product = response.data;
     this.product = product;
 
     if (this.user) {
-      const cartResponse = await axios.get(`/api/users/${this.user.uid}/cart`);
+      const cartResponse = await axios.get(`/users/${this.user.uid}/cart`);
       const cartItems = cartResponse.data;
       this.cartItems = cartItems;
     }
