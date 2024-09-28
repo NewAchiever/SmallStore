@@ -2,7 +2,6 @@
   <div class="grid-wrap">
     <div
       class="product-item"
-      v-if="products.length > 0"
       v-for="(product, index) in products"
       :key="product.id"
     >
