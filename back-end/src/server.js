@@ -12,7 +12,13 @@ async function start(){
 
     const client = new MongoClient(`mongodb+srv://fullstackvue:fullstackvue@cluster0.vppqkub.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
 
-    await client.connect();
+    
+    try{
+        await client.connect();
+    }
+    catch(err){
+        console.log(err)
+    }
     const db = client.db('dsv-db');
     
     const app = express();
@@ -25,14 +31,12 @@ async function start(){
         {maxAge: '1y', etag:false},
     ))
     
-    app.get('/api/products', async (req, res) => {
-        
+    app.get('/api/products', async (req, res) => {        
         const products = await db.collection('products').find({}).toArray();
         res.send(products);
     })
     
     async function populateCartIds(ids){
-        
         return Promise.all(ids.map(id => db.collection('products').findOne({id})))
     }
     
